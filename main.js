@@ -16,28 +16,30 @@ let outputObjectsArray2 = [];
 let outputObjectsArray3 = [];
 let outputObjectsArray4 = [];
 let outputObjectsArray5 = [];
+const productAttributes = [
+  'Attribute 1 value(s)',
+  'Attribute 2 value(s)',
+  'Attribute 3 value(s)',
+  'Attribute 4 value(s)',
+  'Attribute 5 value(s)',
+];
 
 fs.createReadStream('data.csv')
   .pipe(csv())
   .on('data', (data) => csvObjectsArray.push(data)) //TODO create writeStream
   .on('end', () => {
-    csvObjectsArray = cleanCSVObjectsArray(csvObjectsArray, [
-      'Attribute 1 value(s)',
-      'Attribute 2 value(s)',
-      'Attribute 3 value(s)',
-      'Attribute 4 value(s)',
-      'Attribute 5 value(s)',
-    ]);
-
-    arrayToObjectsArray(csvObjectsArray, outputObjectsArray1);
-    arrayToObjectsArray(outputObjectsArray1, outputObjectsArray2);
-    arrayToObjectsArray(outputObjectsArray2, outputObjectsArray3);
-    arrayToObjectsArray(outputObjectsArray3, outputObjectsArray4);
-    arrayToObjectsArray(outputObjectsArray4, outputObjectsArray5);
+    csvObjectsArray = cleanCSVObjectsArray(csvObjectsArray, productAttributes);
+    // console.log(csvObjectsArray);
+    // console.log(`Total New Variations: ${csvObjectsArray.length}`);
+    // arrayToObjectsArray(csvObjectsArray, outputObjectsArray1);
+    // arrayToObjectsArray(outputObjectsArray1, outputObjectsArray2);
+    // arrayToObjectsArray(outputObjectsArray2, outputObjectsArray3);
+    // arrayToObjectsArray(outputObjectsArray3, outputObjectsArray4);
+    // arrayToObjectsArray(outputObjectsArray4, outputObjectsArray5);
     // console.log(outputObjectsArray5);
 
+    /*
     // Parse and create a csv file based on the output Array Objects
-
     const data = outputObjectsArray5;
 
     // Create a CSV writer
@@ -113,6 +115,7 @@ fs.createReadStream('data.csv')
     writer.writeRecords(data).then(() => {
       console.log('The CSV file was written successfully');
     });
+    */
   });
 
 // START SERVER

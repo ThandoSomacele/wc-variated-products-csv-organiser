@@ -1,31 +1,44 @@
-// Step 1: Spread and convert longest array into ObjectsArray propeties within output array (ObjectsArray)
+exports.arrayToObjectsArray = (
+  arrayOfUnvariatedRecordObjects,
+  newArrayOfVarietdObjectRecords,
+  productsAttributesArray
+) => {
+  // console.log(arrayOfUnvariatedRecordObjects);
 
-exports.arrayToObjectsArray = (inputObjectsArray, outputObjectsArray) => {
-  // console.log(inputObjectsArray);
-  // loop over each ObjectsArray in array
+  // Loop over each Unvariated unvariatedRecordObject in Array
+  arrayOfUnvariatedRecordObjects.forEach((unvariatedRecordObject) => {
+    // console.log(unvariatedRecordObject);
 
-  const newObjectsArray = inputObjectsArray.forEach((obj) => {
-    // loop over specific array property values
-
-    const objArraysToLoop = Object.keys(obj).filter((key) => {
+    // Create an Array of only "Attribute X value(s)" found in the unvariatedRecordObject
+    const arrayOfValuesAttributeKeys = Object.keys(
+      unvariatedRecordObject
+    ).filter((key) => {
+      // console.log(key);
       if (
-        (key === 'Attribute 1 value(s)' && Array.isArray(obj[key])) ||
-        (key === 'Attribute 2 value(s)' && Array.isArray(obj[key])) ||
-        (key === 'Attribute 3 value(s)' && Array.isArray(obj[key])) ||
-        (key === 'Attribute 4 value(s)' && Array.isArray(obj[key])) ||
-        (key === 'Attribute 5 value(s)' && Array.isArray(obj[key]))
+        // Check and return only Keys that match any of the "Attribute X value(s)" found in the arrayOfVariationsAttributeKeysarrayOfVariationsAttributeKeys
+        productsAttributesArray.some((attribute) => attribute === key) &&
+        Array.isArray(unvariatedRecordObject[key])
       )
         return key;
     });
 
-    const newArrayObjectsArrays = objArraysToLoop.forEach((arrName) => {
-      // create new ObjectsArray from array value with all other previous properties
-
-      const arrayOfNewObjectsArrays = obj[arrName].map((v) => {
-        const newObjectsArray = new Object({ ...obj, [arrName]: v });
-        return newObjectsArray;
+    // Create a new Array of Variated Object Records
+    arrayOfValuesAttributeKeys.forEach((valuesAttributeKey) => {
+      // console.log(unvariatedRecordObject[valuesAttributeKey]);
+      const newArrayOfObjectRecords = unvariatedRecordObject[
+        valuesAttributeKey
+      ].map((variation) => {
+        const createNewObjectRecords = () => {
+          // delete unvariatedRecordObject[valuesAttributeKey];
+          const objectRecord = new Object({
+            ...unvariatedRecordObject,
+            [valuesAttributeKey]: variation,
+          });
+          return objectRecord;
+        };
+        return createNewObjectRecords();
       });
-      outputObjectsArray.push(...arrayOfNewObjectsArrays);
+      newArrayOfVarietdObjectRecords.push(...newArrayOfObjectRecords);
     });
   });
 };
