@@ -1,0 +1,18 @@
+{
+  "name": "wc-spreadsheet-app",
+  "version": "1.0.0",
+  "description": "Helps orginise know variables together for a variated products.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon main.js"
+  },
+  "author": "Thando Somacele",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
