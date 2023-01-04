@@ -1,4 +1,4 @@
-exports.arrayToObjectsArray = (
+exports.variateObjectRecords = (
   arrayOfUnvariatedRecordObjects,
   newArrayOfVarietdObjectRecords,
   productsAttributesArray
@@ -22,22 +22,25 @@ exports.arrayToObjectsArray = (
         return key;
     });
 
+    // console.log(arrayOfValuesAttributeKeys);
     // Create a new Array of Variated Object Records
     arrayOfValuesAttributeKeys.forEach((valuesAttributeKey) => {
       // console.log(unvariatedRecordObject[valuesAttributeKey]);
+
       const newArrayOfObjectRecords = unvariatedRecordObject[
         valuesAttributeKey
       ].map((variation) => {
         const createNewObjectRecords = () => {
           // delete unvariatedRecordObject[valuesAttributeKey];
-          const objectRecord = new Object({
+          const objectRecord = {
             ...unvariatedRecordObject,
             [valuesAttributeKey]: variation,
-          });
+          };
           return objectRecord;
         };
         return createNewObjectRecords();
       });
+
       newArrayOfVarietdObjectRecords.push(...newArrayOfObjectRecords);
     });
   });

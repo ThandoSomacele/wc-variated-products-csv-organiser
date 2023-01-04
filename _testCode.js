@@ -2,8 +2,7 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const csvWriter = require('csv-writer').createObjectCsvWriter;
 
-const { arrayToObjectsArray } = require('./arrayToObjectsArray');
-const { cleanCSVObjectsArray } = require('./cleanCSVObjectsArray');
+const { variateObjectRecords } = require('./variateObjectRecords');
 
 //
 
@@ -15,9 +14,12 @@ const data = [
       'Arris all round',
       'Arris two sides',
       'Grooved for clips',
+      'blllakjskjd',
     ],
     'Attribute 2 name': 'Dimensions',
     'Attribute 2 value(s)': ['65mm x 20mm', '100mm x 20mm', 'Custom size'],
+    'Attribute 3 name': 'Pudo',
+    'Attribute 3 value(s)': ['H1', 'H2', 'H3'],
   },
 ];
 
@@ -36,9 +38,19 @@ const productAttributes = [
   'Attribute 5 value(s)',
 ];
 
-arrayToObjectsArray(data, outputObjectsArray1, productAttributes);
-console.log(outputObjectsArray1);
-console.log(`Total New Rows: ${outputObjectsArray1.length}`);
+variateObjectRecords(data, outputObjectsArray1, productAttributes);
+variateObjectRecords(
+  outputObjectsArray1,
+  outputObjectsArray2,
+  productAttributes
+);
+variateObjectRecords(
+  outputObjectsArray2,
+  outputObjectsArray3,
+  productAttributes
+);
+console.log(outputObjectsArray3);
+console.log(`Total New Rows: ${outputObjectsArray3.length}`);
 
 /*
 // Create a CSV writer
